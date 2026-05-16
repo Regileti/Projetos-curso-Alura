@@ -60,3 +60,35 @@ function reiniciar(){
     document.getElementById('lista-amigos').innerHTML = '';
     document.getElementById('lista-sorteio').innerHTML = '';
 }
+
+function remover(){
+    let nome = document.getElementById('nome-amigo');
+    let nomeDigitado = nome.value.trim();
+
+    // verifica se o campo está vazio
+    if (nomeDigitado === '') {
+        alert('Digite um nome para remover!');
+        return;
+    }
+
+    // procura o índice ignorando maiúsculas/minúsculas
+    let indice = amigos.findIndex(
+        amigo => amigo.toLowerCase() === nomeDigitado.toLowerCase()
+    );
+
+    // verifica se encontrou
+    if (indice === -1) {
+        alert('Amigo não encontrado!');
+        return;
+    }
+
+    // remove do array
+    amigos.splice(indice, 1);
+
+    // atualiza lista visual
+    let listaDeAmigos = document.getElementById('lista-amigos');
+    listaDeAmigos.textContent = amigos.join(', ');
+
+    // limpa input
+    nome.value = '';
+}
